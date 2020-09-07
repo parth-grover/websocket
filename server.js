@@ -1,14 +1,15 @@
 const dotenv = require('dotenv');
 const express = require('express');
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
+const fs = require('fs');
+const key = fs.readFileSync('./key.pem');
+const cert = fs.readFileSync('./cert.pem');
 dotenv.config({ path: './config.env' });
-
 const app = express();
+const https = require('https');
 
-const http = require('http');
-const { stringify } = require('querystring');
-
-const server = http.createServer(app);
+//const server = http.createServer(app);
+const server = https.createServer({ key: key, cert: cert }, app);
 
 const port = process.env.PORT || 3001;
 
@@ -52,7 +53,7 @@ socket_con.on('connection', (socket) => {
   socket.on('message', (msg) => {
     socket.broadcast.emit('message', msg);
   });
-  //   socket.on('vue_msg', (msg) => {
-  //     socket.emit('re_vue_msg', msg);
-  //   });
+  socket.on('vue_msg', (msg) => {
+    socket.emit('re_vue_msg', msg);
+  });
 });
