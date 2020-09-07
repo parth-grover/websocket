@@ -6,7 +6,7 @@ const key = fs.readFileSync('./key.pem');
 const cert = fs.readFileSync('./cert.pem');
 dotenv.config({ path: './config.env' });
 const app = express();
-const https = require('https');
+const http = require('http');
 
 const server = http.createServer(app);
 //const server = https.createServer({ key: key, cert: cert }, app);
