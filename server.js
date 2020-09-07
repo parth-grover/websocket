@@ -49,10 +49,10 @@ const socket_con = require('socket.io')(server);
 
 socket_con.on('connection', (socket) => {
   console.log('socket connected');
-  //socket.on('message', (msg) => {
-  //socket.broadcast.emit('message', msg);
-  //});
-  socket.on('vue_msg', (msg) => {
-    socket.emit('re_vue_msg', msg);
+  socket.on('message', (msg) => {
+    socket.broadcast.emit('message', msg);
   });
+  //   socket.on('vue_msg', (msg) => {
+  //     socket.emit('re_vue_msg', msg);
+  //   });
 });
