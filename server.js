@@ -8,8 +8,8 @@ dotenv.config({ path: './config.env' });
 const app = express();
 const https = require('https');
 
-//const server = http.createServer(app);
-const server = https.createServer({ key: key, cert: cert }, app);
+const server = http.createServer(app);
+//const server = https.createServer({ key: key, cert: cert }, app);
 
 const port = process.env.PORT || 3001;
 
